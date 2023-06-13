@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semesterchat
+  labels:
+    app: semesterchat
+    group: testing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+       app: semesterchat
+  template:
+    metadata:
+      labels:
+        app: semesterchat
+        group: testing
+    spec:
+      containers:
+        - name: semesterchat
+          image: pixiray.azurecr.io/signalrchat
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 8080
+            - name: websocket
+              containerPort: 5000
+        # - name: "KNOWN_PROXIES"
+         #   value: "10.0.185.130"
